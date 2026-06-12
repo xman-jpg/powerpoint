@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انواع صفت در زبان فارسی</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: #fff0f3;
+            color: #4a1521;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container & Slide Structure */
+        .presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe3e8 100%);
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.1);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 100px 100px 100px; /* فضای کافی برای دکمه‌های پایین */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(50px) scale(0.98);
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.8s ease,
+                visibility 0.8s;
+            overflow-y: auto; /* فعال شدن اسکرول داخلی برای متن‌های طولانی در موبایل */
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0) scale(1);
+        }
+
+        /* Typography & Girly Accents */
+        h1.main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff4d6d;
+            text-shadow: 2px 4px 10px rgba(255, 77, 109, 0.15);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2.slide-title {
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            margin-bottom: 25px;
+            align-self: flex-start;
+            border-bottom: 4px solid #ffb3c1;
+            padding-bottom: 10px;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        p.subtitle {
+            font-size: 1.5rem;
+            color: #590d22;
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ffe3e8;
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(255, 179, 193, 0.2);
+            font-size: 1.4rem;
+            line-height: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-left: 6px solid #ff758f;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(255, 179, 193, 0.15);
+        }
+
+        .card h3 {
+            color: #ff4d6d;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Highlights & Tags */
+        .highlight-sofat {
+            color: #ff4d6d;
+            font-weight: 700;
+            background-color: #fff0f3;
+            padding: 2px 8px;
+            border-radius: 8px;
+        }
+
+        .highlight-movsoof {
+            color: #c9184a;
+            font-weight: 700;
+            background-color: #ffe3e8;
+            padding: 2px 8px;
+            border-radius: 8px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        li::before {
+            content: "🌸";
+            position: absolute;
+            right: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 179, 193, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px 20px;
+            text-align: right;
+            font-size: 1.1rem;
+        }
+
+        th {
+            background-color: #ff758f;
+            color: white;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff5f7;
+        }
+
+        /* Metadata info for first slide */
+        .meta-info {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: #800f2f;
+            display: flex;
+            flex-wrap: wrap; /* اجازه به شکستن خط در ابعاد کوچک */
+            justify-content: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: 1px solid #ffb3c1;
+        }
+
+        /* Controls Panel */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 179, 193, 0.4);
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.15);
+        }
+
+        .btn {
+            background: #ff758f;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: #ff4d6d;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .page-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #590d22;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .flower-accent {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ==========================================================================
+           Media Queries (تنظیمات ریسپونسیو برای موبایل و تبلت)
+           ========================================================================== */
+        
+        /* تبلت‌ها و صفحات کوچک‌تر از 1024 پیکسل */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px 50px 100px 50px;
+            }
+            h1.main-title { font-size: 2.8rem; }
+            h2.slide-title { font-size: 2.2rem; }
+            p.subtitle { font-size: 1.3rem; }
+            .content-box { font-size: 1.2rem; padding: 30px; }
+            .grid-3 { grid-template-columns: 1fr 1fr; } /* تبدیل ۳ ستون به ۲ ستون */
+        }
+
+        /* موبایل‌ها (صفحات کوچک‌تر از 768 پیکسل) */
+        @media (max-width: 768px) {
+            body {
+                overflow: auto; /* اجازه دادن به اسکرول کلی در صورت نیاز شدید */
+            }
+            .slide {
+                padding: 30px 20px 90px 20px; /* کاهش پدینگ اسلایدها */
+                justify-content: flex-start; /* چیدمان از بالا برای جا شدن محتوا */
+                padding-top: 40px;
+            }
+            h1.main-title { font-size: 2rem; margin-bottom: 15px; }
+            h2.slide-title { font-size: 1.6rem; margin-bottom: 20px; border-bottom-width: 3px; }
+            p.subtitle { font-size: 1.1rem; margin-bottom: 25px; }
+            .content-box { font-size: 1.1rem; padding: 20px; border-radius: 16px; }
+            
+            /* تک ستونه کردن تمام گریدها در موبایل */
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .card { padding: 15px; border-radius: 12px; }
+            .card h3 { font-size: 1.2rem; }
+            
+            .flower-accent { font-size: 2.5rem; }
+            .meta-info { font-size: 1rem; padding: 10px 15px; border-radius: 15px; gap: 10px; }
+            
+            /* بهینه‌سازی جدول برای موبایل (اضافه شدن اسکرول افقی افقی فقط برای جدول) */
+            th, td { padding: 10px 12px; font-size: 0.95rem; }
+            
+            .controls {
+                bottom: 15px;
+                padding: 6px 15px;
+            }
+            .btn { width: 35px; height: 35px; font-size: 1.1rem; }
+            .page-number { font-size: 1rem; min-width: 50px; }
+        }
+
+        /* موبایل‌های خیلی کوچک (صفحات کمتر از 480 پیکسل) */
+        @media (max-width: 480px) {
+            h1.main-title { font-size: 1.7rem; }
+            h2.slide-title { font-size: 1.4rem; }
+            .content-box, .card { font-size: 1rem; }
+            th, td { font-size: 0.85rem; padding: 8px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation">
+
+        <!-- Slide 1: Welcome & Intro -->
+        <div class="slide active">
+            <div class="flower-accent">✨﷽✨</div>
+            <h1 class="main-title">انواع صفت در زبان فارسی</h1>
+            <p class="subtitle">تحلیل کامل، جامع و گام‌به‌گام ساختارها همراه با مثال‌های زنده و کاربردی</p>
+            <div class="meta-info">
+                <span><strong>محقق:</strong> فاطمه ترک بیات</span>
+                <span><strong>دبیر:</strong> هدیه بشارت</span>
+                <span><strong>مبحث:</strong> ادبیات فارسی</span>
+                <span><strong>مدرسه:</strong> غیر دولتی رفاه</span>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide">
+            <h2 class="slide-title">مقدمه و تعاریف پایه</h2>
+            <div class="content-box">
+                <div class="flower-accent" style="font-size: 3rem; text-align: center; margin-bottom: 10px;">📚</div>
+                <p style="text-align: center; font-size: 1.4rem; color: #ff4d6d; font-weight: bold; margin-bottom: 20px;">
+                    ورود به دنیای جادویی توصیف و ویژگی‌ها در دستور زبان فارسی
+                </p>
+                <p style="text-align: justify;">
+                    زبان فارسی بدون صفت‌ها، زبانی بی‌رنگ و روح است. صفت‌ها به ما اجازه می‌دهند تا جهان پیرامون خود را با
+                    جزئیات دقیق، احساسات عمیق و تصاویر زنده به دیگران منتقل کنیم. در این ارائه، به بررسی علمی و
+                    طبقه‌بندی دقیق این ارکان مهم خواهیم پرداخت.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Definition of Sofat and Movsoof -->
+        <div class="slide">
+            <h2 class="slide-title">تعریف صفت و موصوف</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>صفت چیست؟</h3>
+                    <p>صفت کلمه یا گروهی از کلمه‌هاست که قبل یا بعد از اسم می‌آید تا ویژگی، کیفیت، مقدار یا حالتی از آن
+                        را توضیح داده یا روشن‌تر کند.</p>
+                    <p style="margin-top: 15px;"><strong>مثال تفکیک‌شده:</strong></p>
+                    <ul>
+                        <li>دخترِ <span class="highlight-sofat">باهوش</span> (باهوش = صفت)</li>
+                        <li>گلِ <span class="highlight-sofat">زیبا</span> (زیبا = صفت)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>موصوف چیست؟</h3>
+                    <p>موصوف همان اسمی است که توسط صفت توصیف می‌شود و ویژگی‌های آن مورد بررسی قرار می‌گیرد.</p>
+                    <p style="margin-top: 15px;"><strong>مثال تفکیک‌شده:</strong></p>
+                    <ul>
+                        <li><span class="highlight-movsoof">دخترِ</span> باهوش (دختر = موصوف)</li>
+                        <li><span class="highlight-movsoof">گلِ</span> زیبا (گل = موصوف)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: General Classification -->
+        <div class="slide">
+            <h2 class="slide-title">تقسیم‌بندی کلی صفت‌ها</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>صفت‌های پیشین</h3>
+                    <p>صفت‌هایی هستند که پیش از موصوف خود قرار می‌گیرند و هیچ‌گاه میان آن‌ها کسره‌ی اضافه (ـِـ) نمی‌آید.
+                    </p>
+                    <p style="margin-top: 10px; font-weight: bold; color: #ff758f;">مثال: این خانه، هر کتاب</p>
+                </div>
+                <div class="card">
+                    <h3>صفت‌های پسین</h3>
+                    <p>صفت‌هایی هستند که پس از اسم (موصوف) می‌آیند و پیوند آن‌ها با نقش‌نمای اضافه برقرار می‌شود.</p>
+                    <p style="margin-top: 10px; font-weight: bold; color: #ff758f;">مثال: هوای پاک، نگاه مهربان</p>
+                </div>
+                <div class="card">
+                    <h3>ساختمان صفت</h3>
+                    <p>صفت‌ها از جهت ساختار کلمه‌سازی به انواع ساده، مرکب، مشتق و مشتق‌مرکب تفکیک می‌شوند.</p>
+                    <p style="margin-top: 10px; font-weight: bold; color: #ff758f;">مثال: خوب، خندان، نیک‌ورز</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Section 1 Intro -->
+        <div class="slide">
+            <h2 class="slide-title">بخش اول: صفت‌های بیانی (پسین)</h2>
+            <div class="content-box" style="text-align: center; background: rgba(255, 240, 243, 0.8);">
+                <div class="flower-accent" style="font-size: 3rem; margin-bottom: 10px;">✨</div>
+                <h3 style="font-size: 1.8rem; color: #c9184a; margin-bottom: 20px;">بررسی مفصل صفت‌های بیانی</h3>
+                <p style="max-width: 800px; margin: 0 auto;">
+                    صفت‌های بیانی رایج‌ترین نوع صفت در زبان فارسی هستند که چگونگی، خصوصیات، رنگ، شکل و ویژگی‌های ساختاری
+                    اسم را آشکار می‌سازند.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Five Types of Bayani -->
+        <div class="slide">
+            <h2 class="slide-title">پنج نوع صفت بیانی</h2>
+            <div class="content-box">
+                <ul>
+                    <li><strong>۱. صفت بیانی ساده (مطلق):</strong> صفتی است که فقط چگونگی موصوف را بیان می‌کند و ساختار
+                        ساده‌ای دارد. <span class="highlight-sofat">(مثال: گرم، پاک، عاقل)</span></li>
+                    <li><strong>۲. صفت فاعلی:</strong> نشان می‌دهد که موصوف کننده یا انجام‌دهنده‌ی کاری است. <span
+                            class="highlight-sofat">(مثال: شنونده، دانا، خندان)</span></li>
+                    <li><strong>۳. صفت مفعولی:</strong> نشان می‌دهد که کار بر روی موصوف انجام شده است. <span
+                            class="highlight-sofat">(مثال: نوشته شده، گرفتار)</span></li>
+                    <li><strong>۴. صفت نسبی:</strong> موصوف را به مکان، زمان، جنس یا مذهبی نسبت می‌دهد. <span
+                            class="highlight-sofat">(مثال: ایرانی، طلایی، کودکانه)</span></li>
+                    <li><strong>۵. صفت لیاقت:</strong> شایستگی، شایانی و قابلیت موصوف را برای پذیرش کاری نشان می‌دهد.
+                        <span class="highlight-sofat">(مثال: خواندنی، دیدنی)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Active Adjective Formulas -->
+        <div class="slide">
+            <h2 class="slide-title">فرمول‌های طلایی صفت فاعلی</h2>
+            <div class="content-box">
+                <p style="margin-bottom: 20px; font-weight: bold; color: #c9184a;">صفت فاعلی در زبان فارسی با استفاده از
+                    فرمول‌های ساختاری منظم از ریشه‌های فعلی ساخته می‌شود:</p>
+                <div class="grid-2">
+                    <div class="card">
+                        <ul>
+                            <li><strong>بن مضارع + نده:</strong> گوینده، بیننده، نویسنده</li>
+                            <li><strong>بن مضارع + ا:</strong> دانا، بینا، شنوا، توانا</li>
+                            <li><strong>بن مضارع + ان:</strong> گریان، خندان، روان، سوزان</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <ul>
+                            <li><strong>بن ماضی + ار:</strong> خریدار، خواستار</li>
+                            <li><strong>بن ماضی/مضارع + گار:</strong> آفریدگار، پرهیزگار</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Passive & Fitness Adjectives -->
+        <div class="slide">
+            <h2 class="slide-title">صفت مفعولی و صفت لیاقت</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>صفت مفعولی</h3>
+                    <p>صفتی است که معنای مفعول را به همراه دارد و معمولاً بر اثرپذیری موصوف دلالت دارد.</p>
+                    <p style="margin-top: 15px; background: #fff; padding: 10px; border-radius: 8px;">
+                        <strong>فرمول ساخت:</strong> بن ماضی + هـ / ـه (غیرملفوظ)<br>
+                        <strong>مثال:</strong> نامه‌ی نوشته، ظرفِ شکسته
+                    </p>
+                    <p style="font-size: 1rem; margin-top: 10px; color: #800f2f;">* نکته: گاهی فعل یار کمکی "شده" یا
+                        "بود" نیز همراه آن می‌آید.</p>
+                </div>
+                <div class="card">
+                    <h3>صفت لیاقت</h3>
+                    <p>صفتی است که شایستگی، سزاواری و قابلیتِ پذیرش کار یا صفتی را از جانب موصوف بیان می‌کند.</p>
+                    <p style="margin-top: 15px; background: #fff; padding: 10px; border-radius: 8px;">
+                        <strong>فرمول ساخت:</strong> مصدر کامل + ی لیاقت<br>
+                        <strong>مثال:</strong> فیلمِ دیدنی، لباسِ پوشیدنی، آبِ آشامیدنی
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Relative Adjectives -->
+        <div class="slide">
+            <h2 class="slide-title">صفت نسبی چیست؟</h2>
+            <div class="content-box">
+                <p style="margin-bottom: 20px;">صفت نسبی صفتی است که موصوف خود را به جایی، کسی، چیزی، زمانی یا مکانی
+                    نسبت می‌دهد. این صفت معمولاً از پیوند یک <strong>"اسم"</strong> یا <strong>"صفت"</strong> با
+                    پسوندهای ویژه ساخته می‌شود:</p>
+                <div class="grid-3">
+                    <div class="card" style="text-align: center;">
+                        <h4>پسوند «ی»</h4>
+                        <p style="color:#ff4d6d; font-weight:bold; margin-top:10px;">شیرازی، طلایی، جنگلی</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h4>پسوند «ین / ینه»</h4>
+                        <p style="color:#ff4d6d; font-weight:bold; margin-top:10px;">آهنین، زرینه، مسین</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h4>پسوند «انه»</h4>
+                        <p style="color:#ff4d6d; font-weight:bold; margin-top:10px;">دخترانه، روزانه، عاقلانه</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Grading of Bayani Adjectives -->
+        <div class="slide">
+            <h2 class="slide-title">درجه‌بندی صفت‌های بیانی</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>صفت مطلق</h3>
+                    <p>صفت بیانی ساده‌ای است که بدون مقایسه با دیگری، ویژگی موصوف را به تنهایی بیان می‌کند.</p>
+                    <p style="color: #c9184a; font-weight: bold; margin-top: 10px;">مثال: دخترِ زیبا، راهِ طولانی</p>
+                </div>
+                <div class="card">
+                    <h3>صفت برتر (تفضیلی)</h3>
+                    <p>موصوف را با یک یا چند مورد دیگر مقایسه می‌کند و از پسوند «تر» برای ایجاد تمایز استفاده می‌کند.
+                    </p>
+                    <p style="color: #c9184a; font-weight: bold; margin-top: 10px;">مثال: این دختر از او زیباتر است.</p>
+                </div>
+                <div class="card">
+                    <h3>صفت برترین (عالی)</h3>
+                    <p>موصوف را با تمامی افراد یا پدیده‌های هم‌جنس مقایسه کرده و با پسوند «ترین» مشخص می‌کند.</p>
+                    <p style="color: #c9184a; font-weight: bold; margin-top: 10px;">مثال: زیباترین نقاشی دنیا</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Section 2 Intro -->
+        <div class="slide">
+            <h2 class="slide-title">بخش دوم: صفت‌های پیشین</h2>
+            <div class="content-box" style="text-align: center; background: rgba(255, 240, 243, 0.8);">
+                <div class="flower-accent" style="font-size: 3rem; margin-bottom: 10px;">✨</div>
+                <h3 style="font-size: 1.8rem; color: #c9184a; margin-bottom: 20px;">بررسی صفت‌های قبل از اسم</h3>
+                <p style="max-width: 800px; margin: 0 auto;">
+                    بررسی صفت‌هایی که پیش از موصوف می‌آیند، ساختار متفاوتی دارند و برای اتصال به اسم، نیازی به کسره مضاف
+                    (نقش‌نما) ندارند.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Five Types of Pishin -->
+        <div class="slide">
+            <h2 class="slide-title">پنج صفت پیشین مهم</h2>
+            <div class="content-box">
+                <ul>
+                    <li><strong>۱. صفت اشاره:</strong> واژه‌هایی چون «این، آن، همین، همان، چنین، چنان» که اشاره به موصوف
+                        دارند. <span class="highlight-sofat">(مثال: این کتاب، همان باغ)</span></li>
+                    <li><strong>۲. صفت پرسشی:</strong> واژه‌هایی نظیر «کدام، چند، چه، چقدر» که برای پرسش از ویژگی‌های
+                        اسم می‌آیند. <span class="highlight-sofat">(مثال: کدام مدرسه؟ چند روز؟)</span></li>
+                    <li><strong>۳. صفت تعجبی:</strong> کلماتی مانند «چه، عجب، چقدر» که شگفتی گوینده را درباره موصوف نشان
+                        می‌دهند. <span class="highlight-sofat">(مثال: چه نقاشی زیبایی!)</span></li>
+                    <li><strong>۴. صفت مبهم:</strong> واژه‌هایی مانند «هر، همه، فلان، قدری، چند، دگر» که ویژگی اسم را به
+                        طور نامشخص بیان می‌کنند. <span class="highlight-sofat">(مثال: هر دانش‌آموز، فلان کار)</span>
+                    </li>
+                    <li><strong>۵. صفت شمارشی (اصلی و ترتیبی):</strong> اعداد ریاضی قبل از موصوف قرار می‌گیرند. <span
+                            class="highlight-sofat">(مثال: دو فرشته، اولین گام)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 13: Comparison Table -->
+        <div class="slide">
+            <h2 class="slide-title">مقایسه کلی صفت‌های پیشین و پسین</h2>
+            <div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>معیار مقایسه</th>
+                            <th>صفت‌های پیشین</th>
+                            <th>صفت‌های پسین (بیانی)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>جایگاه نسبت به اسم</strong></td>
+                            <td>قبل از هسته (اسم/موصوف) قرار می‌گیرند.</td>
+                            <td>بعد از هسته (اسم/موصوف) قرار می‌گیرند.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>کسره نقش‌نما (ـِـ)</strong></td>
+                            <td>بدون هیچ‌گونه کسره مضاف به اسم می‌چسبند.</td>
+                            <td>حتماً با کسره نقش‌نما (ـِـ) به اسم متصل می‌شوند.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>تنوع دسته‌ها</strong></td>
+                            <td>اشاره، پرسشی، تعجبی، مبهم، شمارشی اصلی</td>
+                            <td>بیانی ساده، فاعلی، مفعولی، نسبی، لیاقت</td>
+                        </tr>
+                        <tr>
+                            <td><strong>مثال‌های کاربردی</strong></td>
+                            <td><span class="highlight-sofat">آن</span> دختر، <span class="highlight-sofat">چند</span>
+                                سوال، <span class="highlight-sofat">سه</span> گام</td>
+                            <td>دخترِ <span class="highlight-movsoof">مهربان</span>، کتابِ <span
+                                    class="highlight-movsoof">خواندنی</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 14: Golden Trick -->
+        <div class="slide">
+            <h2 class="slide-title">یک ترفند طلایی و کاربردی!</h2>
+            <div class="content-box">
+                <h4 style="color: #ff4d6d; font-size: 1.5rem; margin-bottom: 15px; text-align: center;">⭐ ۱۰۰٪ تضمینی
+                    برای امتحانات ⭐</h4>
+                <p style="text-align: center; font-weight: bold; margin-bottom: 25px;">تفاوت صفت پسین با مضاف‌الیه را
+                    چطور بفهمیم؟</p>
+                <div class="grid-2">
+                    <div class="card">
+                        <h5>۱. افزودن «تر»</h5>
+                        <p>به انتهای ترکیب «تر» اضافه کنید؛ اگر معنی داد، صفت است در غیر این صورت مضاف‌الیه است.</p>
+                        <p style="margin-top: 10px; font-size: 1.1rem;">
+                            ✅ هوای پاک‌تر (صفت)<br>
+                            ❌ کیفِ علی‌تر (مضاف‌الیه)
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h5>۲. افزودن «است»</h5>
+                        <p>در آخر ترکیب «است» بگذارید و کسره اول را بردارید؛ اگر جمله کامل شد، صفت است.</p>
+                        <p style="margin-top: 10px; font-size: 1.1rem;">
+                            ✅ هوا پاک است (صفت)<br>
+                            ❌ کیف علی است (مضاف‌الیه)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusion -->
+        <div class="slide">
+            <div class="flower-accent">🌸🍃</div>
+            <h2 class="main-title" style="font-size: 2.5rem;">سخن پایانی و نتیجه‌گیری</h2>
+            <div class="content-box" style="max-width: 800px; text-align: center; background: rgba(255,255,255,0.9);">
+                <p style="font-size: 1.4rem; color: #590d22; line-height: 2; margin-bottom: 20px;">
+                    "زیبایی‌های زبان فارسی با بکارگیری صفت‌های رنگارنگ و ظریف آشکار می‌شود."
+                </p>
+                <p style="color: #ff758f;">
+                    امیدوارم این سفر شیرین در میان صفت‌های دستور زبان فارسی برای شما مفید و لذت‌بخش بوده باشد. از توجه و
+                    همراهی شما سپاسگزارم.
+                </p>
+            </div>
+        </div>
+
+        <!-- Universal Controls Grid -->
+        <div class="controls">
+            <button class="btn" id="prevBtn">➔</button>
+            <span class="page-number" id="pageIndicator">۱ / ۱۵</span>
+            <button class="btn" id="nextBtn">➔</button>
+        </div>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageIndicator = document.getElementById('pageIndicator');
+
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // Fix button inner text for layout arrow consistency in RTL
+        nextBtn.innerText = '➔';
+        prevBtn.innerText = '⬅';
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                    slide.scrollTop = 0; // اسکرول به بالای صفحه هنگام تغییر اسلاید در موبایل
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update fractional page indicator using Persian numerals
+            const faCurrent = (currentSlide + 1).toLocaleString('fa-IR');
+            const faTotal = totalSlides.toLocaleString('fa-IR');
+            pageIndicator.innerText = `${faCurrent} / ${faTotal}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Event Listeners for interactive buttons
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard controls adapted perfectly for Persian orientation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                nextSlide(); // Left arrow goes forward in RTL
+            } else if (e.key === 'ArrowRight') {
+                prevSlide(); // Right arrow goes backward in RTL
+            } else if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+
+        // Initialize slide layout view
+        updateSlides();
+    </script>
+
+</body>
+
+</html>
